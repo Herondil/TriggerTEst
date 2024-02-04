@@ -6,6 +6,7 @@ public class OnTrigger : MonoBehaviour
 {
 
     public bool CoroutineStarted = false;
+    public GameObject G;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -26,9 +27,10 @@ public class OnTrigger : MonoBehaviour
     {
         if (Input.GetButton("Fire1"))
         {
+            Debug.Log("click");
             if (!CoroutineStarted)
             {
-                Coroutine c = TriggerActivation();
+                CoroutineStarted = true;
                 StartCoroutine("TriggerActivation");
             }
         }
@@ -36,6 +38,13 @@ public class OnTrigger : MonoBehaviour
 
     IEnumerator TriggerActivation()
     {
-
+        Debug.Log("trigger on");
+        //Collider2D c = GetComponent<BoxCollider2D>();
+        //c.isTrigger = true;
+        G.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        G.SetActive(false);
+        Debug.Log("trigger off");
+        //c.isTrigger = false;
     }
 }
